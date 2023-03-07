@@ -51,8 +51,8 @@ class Dinosaur(Sprite):
     def run(self):
       self.image = RUNNING[0] if self.step_index < 5 else RUNNING[1]
       self.dino_rect = self.image.get_rect()
-      self.dino_rect = self.POS_X
-      self.dino_rect = self.POS_Y
+      self.dino_rect.x = self.POS_X
+      self.dino_rect.y = self.POS_Y
       self.step_index += 1
 
     def jump(self):
@@ -68,6 +68,6 @@ class Dinosaur(Sprite):
     def duck(self):
       self.image = DUCKING[0] if self.step_index < 5 else DUCKING[1]
       self.dino_rect = self.image.get_rect()
-      self.dino_rect = self.POS_X
-      self.dino_rect = self.POS_Y_DUCKING
+      self.dino_rect.x = self.POS_X
+      self.dino_rect.y = self.POS_Y_DUCKING
       self.step_index += 1
