@@ -1,6 +1,9 @@
 import pygame
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
+<<<<<<< HEAD
 from dino_runner.components.obstacles.text_utils import TextUtils
+=======
+>>>>>>> 6262b41574481ebae34bbe0931a3a38d4cac5366
 
 from dino_runner.utils.constants import BG, COLORS, ICON, RUNNING, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 from dino_runner.components.dinosaur import Dinosaur
@@ -20,9 +23,12 @@ class Game:
 
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
+<<<<<<< HEAD
         self.points = 0
         self.text_utils = TextUtils()
         self.game_running = True
+=======
+>>>>>>> 6262b41574481ebae34bbe0931a3a38d4cac5366
 
     def run(self):
         # Game loop: events - update - draw
@@ -50,7 +56,11 @@ class Game:
 
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
+<<<<<<< HEAD
         self.score()
+=======
+
+>>>>>>> 6262b41574481ebae34bbe0931a3a38d4cac5366
         pygame.display.update()
         pygame.display.flip()
 
