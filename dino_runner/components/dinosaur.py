@@ -1,20 +1,11 @@
 import pygame
 from pygame.sprite import Sprite
-from dino_runner.utils.constants import (
-    RUNNING,
-    DUCKING,
-    JUMPING,
-    DEFAULT_TYPE,
-    SHIELD_TYPE,
-    RUNNING_SHIELD,
-    DUCKING_SHIELD,
-    JUMPING_SHIELD
-)
+from dino_runner.utils.constants import (RUNNING,DUCKING,JUMPING,DEFAULT_TYPE,SHIELD_TYPE,RUNNING_SHIELD,DUCKING_SHIELD,JUMPING_SHIELD)
 
 class Dinosaur(Sprite):
     POS_X = 80
     POS_Y = 310
-    POS_Y_DUCKING = 345
+    POS_Y_DUCKING = 340
     JUMP_VEL = 8.5
 
     def __init__(self):
@@ -105,12 +96,16 @@ class Dinosaur(Sprite):
       self.dino_rect.y = self.POS_Y_DUCKING
       self.step_index += 1
 
-    def check_invincibility(self):
+    def check_invincibility(self, screen):
         if self.shield:
-            time_to_show = round((self.shield_time_up - pygame.time.get_ticks())/1000, 2)
+            time_to_show = round((self.shield_time_up - pygame.time.get_ticks())/1000, 1)
             if time_to_show >= 0:
-                #show remaining time
-                pass
+                if self.show_text:
+                    fond = pygame.font.Font('freesansbold.ttf', 18)
+                    text = fond.render(f'Shield enabled for {time_to_show}', True, (255,0,185))
+                    textRect = text.get_rect()
+                    textRect.center = (500, 40)
+                    screen.blit(text, textRect)
             else:
                 self.shield = False
                 self.update_to_default(SHIELD_TYPE)

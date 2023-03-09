@@ -1,17 +1,16 @@
 import random
 import pygame
-
 from dino_runner.components.power_ups.shield import Shield
 
-
 class PowerUpManager:
-
 
     def __init__(self):
         self.power_ups = []
         self.when_appears = 0
         self.points = 0
         self.option_numbers = list(range(1, 10))
+        self.powerup_sound = pygame.mixer.Sound("powerup_sound.wav")
+        self.powerup_sound.set_volume(1)
 
     def reset_power_ups(self, points):
         self.power_ups = []
@@ -31,6 +30,7 @@ class PowerUpManager:
         for power_up in self.power_ups:
             power_up.update(game_speed, self.power_ups)
             if player.dino_rect.colliderect(power_up.rect):
+                self.powerup_sound.play()
                 power_up.start_time = pygame.time.get_ticks ()
                 player.shield = True
                 player.show_text = True

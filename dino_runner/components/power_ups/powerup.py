@@ -7,13 +7,15 @@ class PowerUp(Sprite):
         self.image = image
         self.type = type
         self.rect = self.image.get_rect()
-        self.rect.x = SCREEN_WIDTH
-        self.rect.y = random.randint(100, 300)
+        self.rect.x = SCREEN_WIDTH + random.randint(800, 1000)
+        self.rect.y = random.randint(100, 175)
+        self.start_time = 0
+        self.width = self.image.get_width()
 
     def update(self, game_speed, powerups_list):
         self.rect.x -= game_speed
 
-        if self.rect.x <= 0:
+        if self.rect.x < - self.rect.width:
             powerups_list.pop()
 
     def draw(self, screen):

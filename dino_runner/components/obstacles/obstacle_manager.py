@@ -8,6 +8,7 @@ class ObstacleManager:
 
     def __init__(self):
         self.obstacles = []
+        self.death_sound = pygame.mixer.Sound("death_sound.wav")
 
     def update(self, game):
         if len(self.obstacles) == 0:
@@ -22,10 +23,22 @@ class ObstacleManager:
         for obstacle in self.obstacles:
             obstacle.update(game.game_speed, self.obstacles)
             if game.player.dino_rect.colliderect(obstacle.rect):
+                pygame.time.delay(70)
+                self.death_sound.play()
+
                 if not game.player.shield:
-                    pygame.time.delay(500)
-                    game.playing = False
-                    break
+                    self.obstacles = []
+                    game.player_heart_manager.reduce_heart()
+
+                    if game.player_heart_manager.heart_count > 0:
+                        game.player.shield = True
+                        game.player.show_text = False
+
+                    else:
+                        pygame.time.delay(1000)
+                        game.playing = False
+                        game.death_count += 1
+                        break
                 else:
                     self.obstacles.remove(obstacle)
 

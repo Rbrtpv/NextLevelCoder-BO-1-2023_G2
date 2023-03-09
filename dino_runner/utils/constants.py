@@ -11,6 +11,18 @@ IMG_DIR = os.path.join(os.path.dirname(__file__), "..", "assets")
 # Assets Constants
 ICON = pygame.image.load(os.path.join(IMG_DIR, "DinoWallpaper.png"))
 
+RESET = [
+    pygame.image.load(os.path.join(IMG_DIR, "Other/Reset.png"))
+]
+
+DINO_START = [
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoStart.png"))
+]
+
+DINO_DEAD = [
+    pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoDead.png"))
+]
+
 RUNNING = [
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun1.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Dino/DinoRun2.png")),
@@ -69,9 +81,14 @@ BG = pygame.image.load(os.path.join(IMG_DIR, 'Other/Track.png'))
 
 HEART = pygame.image.load(os.path.join(IMG_DIR, 'Other/SmallHeart.png'))
 
+MENU = pygame.image.load(os.path.join(IMG_DIR, 'Other/Dino_Runner_Game.png'))
+END_SCREEN = pygame.image.load(os.path.join(IMG_DIR, 'Other/End_Screen.png'))
+
 DEFAULT_TYPE = "default"
 SHIELD_TYPE = "shield"
 
+HEART_COUNT = 4
+FONT_STYLE = 'freesansbold.ttf'
 COLORS = {
     "black": (0,0,0),
     "white": (255,255,255)
