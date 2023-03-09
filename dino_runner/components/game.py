@@ -1,5 +1,6 @@
 import pygame
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
+from dino_runner.components.power_ups.power_up_manager import PowerUpManager
 from dino_runner.components.obstacles.text_utils import TextUtils
 
 from dino_runner.utils.constants import BG, COLORS, ICON, RUNNING, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
@@ -23,6 +24,11 @@ class Game:
         self.points = 0
         self.text_utils = TextUtils()
         self.game_running = True
+        self.powerup_manager = PowerUpManager()
+
+        pygame.mixer.music.load("Running-About.wav")
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.3)
 
     def run(self):
         # Game loop: events - update - draw
@@ -42,6 +48,7 @@ class Game:
     def update(self):
         self.player.update(pygame.key.get_pressed())
         self.obstacle_manager.update(self)
+        self.powerup_manager.update(self.points, self.game_speed, self.player)
 
     def draw(self):
         self.clock.tick(FPS)
@@ -50,6 +57,7 @@ class Game:
 
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
+        self.powerup_manager.draw(self.screen)
         self.score()
         pygame.display.update()
         pygame.display.flip()
@@ -66,6 +74,7 @@ class Game:
     def score(self):
         self.points += 1
         text, text_rect = self.text_utils.get_score(self.points)
+        self.player.check_invincibility()
         self.screen.blit(text, text_rect)
 
     def show_menu(self, death_count = 0):
